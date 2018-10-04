@@ -36,6 +36,20 @@ app.get('/reviews/:reviewid', (req, res) => {
     res.send(reviews);
 });
 
+//GET A REVIEW BY STARS
+app.get('/review/:n/:stars', (req, res) => {
+    const reviews = review.find(c =>c.stars === parseInt(req.params.stars))
+    if(!reviews) return res.status(404).send('The review with the given ID was not found.');
+    res.send(reviews);
+});
+
+//GET A REVIEW BY DATE
+app.get('/review/:n/:from_date/:to_date', (req, res) => {
+    const reviews = review.find(c =>c.date === parseInt(req.params.date))
+    if(!reviews) return res.status(404).send('The review with the given ID was not found.');
+    res.send(reviews);
+});
+
 
 //UPDATE A REVIEW
 app.put('/reviews/:reviewid'), (req, res) => {
